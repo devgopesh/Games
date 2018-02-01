@@ -155,6 +155,24 @@ function restart(){
             }
         }
 
+        //MAKING THE SNAKE APPEAR IF IT CROSSES THE WALL
+        if (snakex === 45) {
+        	snakex = 0;
+        	snakey = myGamePiece[0].y;
+        }
+        else if (snakex === -1) {
+        	snakex = 45;
+        	snakey = myGamePiece[0].y;
+        }
+        else if (snakey === 45) {
+        	snakex = myGamePiece[0].x;
+        	snakey = 0;
+        }
+        else if (snakey === -1) {
+        	snakex = myGamePiece[0].x;
+        	snakey = 45;
+        }
+
         //EATING OF FOOD(myObstacle=FOOD)
         if (snakex === myObstacle.x/10 && snakey === myObstacle.y/10) {
             myObstacle = new component(0, 0, "#f1f1f1", 0, 0);
@@ -173,45 +191,7 @@ function restart(){
             tail.y = snakey;
             myGamePiece.unshift(tail);
         }
-        /*if(myGamePiece.x + 30 > myGameArea.canvas.width){
-            k = 0;
-            myGamePieceA = new component(30, 30, "red", myGamePiece.x-myGameArea.canvas.width, myGamePiece.y);
-            if(myGamePiece.x === 480){
-                myGamePiece = myGamePieceA;
-                myGamePiece.speedY = 0;
-                k = 1;
-            }
-        }
-        if(myGamePiece.x < 0){
-            j = 0;
-            myGamePieceA = new component(30, 30, "red", myGameArea.canvas.width+myGamePiece.x, myGamePiece.y);
-            if(myGamePiece.x === -30){
-                myGamePiece = myGamePieceA;
-                myGamePiece.speedX = -1;
-                myGamePiece.speedY = 0;
-                j = 1;
-            }   
-        }
-        if(myGamePiece.y < 0){
-            i = 0;
-            myGamePieceA = new component(30, 30, "red", myGamePiece.x, myGameArea.canvas.height+myGamePiece.y);
-            if(myGamePiece.y === -30){
-                myGamePiece = myGamePieceA;
-                myGamePiece.speedY = -1;
-                myGamePiece.speedX = 0;
-                i = 1;
-            }
-        }
-        if(myGamePiece.y + 30 > myGameArea.canvas.height){
-            l = 0;
-            myGamePieceA = new component(30, 30, "red", myGamePiece.x, myGamePiece.y-myGameArea.canvas.height);
-            if(myGamePiece.y === 270){
-                myGamePiece = myGamePieceA;
-                myGamePiece.speedY = 1;
-                myGamePiece.speedX = 0;
-                l = 1;
-            }
-        }*/
+       
         myGameArea.clear();
         myObstacle.update();
         myScore.text="SCORE: " + score;
